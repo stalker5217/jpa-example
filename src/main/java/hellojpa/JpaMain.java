@@ -19,7 +19,6 @@ public class JpaMain {
         try {
             // CREATE
             Member member = new Member();
-            member.setId(3L);
             member.setName("Hello");
             entityManager.persist(member);
 
