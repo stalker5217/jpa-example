@@ -14,6 +14,10 @@ public class Member {
     @Column(name = "MEMBER_ID")
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
+
     private String name;
     private String city;
     private String street;
