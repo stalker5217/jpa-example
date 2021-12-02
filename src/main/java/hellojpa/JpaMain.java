@@ -17,21 +17,20 @@ public class JpaMain {
         entityTransaction.begin();
 
         try {
-            // CREATE
-            Member member = new Member();
-            member.setName("Hello");
-            entityManager.persist(member);
+            Order order = new Order();
+            order.setStatus(OrderStatus.ORDER);
+            entityManager.persist(order);
 
-            // READ
-            Member findMember = entityManager.find(Member.class, 3L);
-            System.out.println("ID >> " + findMember.getId());
-            System.out.println("ID >> " + findMember.getName());
+            Delivery delivery = new Delivery();
+            entityManager.persist(delivery);
 
-            // UPDATE
-            findMember.setName("Hello JPA");
+            order.setDelivery(delivery);
 
-            // DELETE
-            entityManager.remove(findMember);
+            entityManager.flush();
+            entityManager.clear();
+
+            Order order2 = entityManager.find(Order.class, order.getId());
+            order2.setDelivery(null);
 
             entityTransaction.commit();
         }
